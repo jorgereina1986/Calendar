@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">February</string>
+
+    // Day number
+    <string name="day_1">\u0020 1</string>
+    <string name="day_2">\u0020 2</string>
+    <string name="day_3">\u0020 3</string>
+    <string name="day_4">\u0020 4</string>
+    <string name="day_5">\u0020 5</string>
+    <string name="day_6">\u0020 6</string>
+    <string name="day_7">\u0020 7</string>
+    <string name="day_8">\u0020 8</string>
+    <string name="day_9">\u0020 9</string>
+    <string name="day_10">10</string>
+    <string name="day_11">11</string>
+    <string name="day_12">12</string>
+    <string name="day_13">13</string>
+    <string name="day_14">14</string>
+    <string name="day_15">15</string>
+    <string name="day_16">16</string>
+    <string name="day_17">17</string>
+    <string name="day_18">18</string>
+    <string name="day_19">19</string>
+    <string name="day_20">20</string>
+    <string name="day_21">21</string>
+    <string name="day_22">22</string>
+    <string name="day_23">23</string>
+    <string name="day_24">24</string>
+    <string name="day_25">25</string>
+    <string name="day_26">26</string>
+    <string name="day_27">27</string>
+    <string name="day_28">28</string>
+
+    // Week day names
+    <string name="sunday">Sun</string>
+    <string name="monday">Mon</string>
+    <string name="tuesday">Tue</string>
+    <string name="wednesday">Wed</string>
+    <string name="thursday">Thu</string>
+    <string name="friday">Fri</string>
+    <string name="saturday">Sat</string>
+
+    // Day Fragment
+    <string name="event_created">Event has been created</string>
+    <string name="event_not_created">Something went wrong. Event was not created.</string>
+
+</resources>
