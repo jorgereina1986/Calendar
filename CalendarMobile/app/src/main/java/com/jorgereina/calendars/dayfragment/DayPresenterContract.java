@@ -19,6 +19,8 @@ public interface DayPresenterContract {
         void eventCreatedSuccess();
 
         void eventFailedToCreate();
+
+        void showCreateEventDialog();
     }
 
     interface Presenter {

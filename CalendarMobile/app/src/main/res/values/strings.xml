@@ -44,4 +44,12 @@
     <string name="event_created">Event has been created</string>
     <string name="event_not_created">Something went wrong. Event was not created.</string>
 
+    // Create Event Dialog
+    <string name="submit">Submit</string>
+    <string name="title_hint">Title</string>
+    <string name="description_hint">Description(optional)</string>
+    <string name="time_hint">Time</string>
+    <string name="dialog_title">Create event</string>
+    <string name="missing_field">Title and Time are required fields.</string>
+
 </resources>
