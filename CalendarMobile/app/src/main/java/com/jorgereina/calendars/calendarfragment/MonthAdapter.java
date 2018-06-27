@@ -31,11 +31,10 @@ public class MonthAdapter extends RecyclerView.Adapter<MonthAdapter.MonthViewHol
 
     @Override
     public void onBindViewHolder(@NonNull MonthViewHolder holder, int position) {
-
         Event event = presenter.onGetEventData(position);
         holder.binding.eventTitleTv.setText(event.getTitle());
         holder.binding.dayTv.setText(event.getDate());
-        holder.binding.timeTv.setText(event.getTime());
+        holder.binding.timeTv.setText(presenter.convertTime(event.getTime()));
     }
 
     @Override

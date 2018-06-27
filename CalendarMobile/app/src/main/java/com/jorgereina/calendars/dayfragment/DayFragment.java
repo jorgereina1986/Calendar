@@ -104,12 +104,11 @@ public class DayFragment extends Fragment implements DayPresenterContract.View {
     @Override
     public void showCreateEventDialog() {
 
-        final DialogCreateEventBinding dialogBinding = DataBindingUtil.inflate(LayoutInflater.from(
-                getActivity()),
+        final DialogCreateEventBinding dialogBinding = DataBindingUtil.inflate(
+                LayoutInflater.from(getActivity()),
                 R.layout.dialog_create_event,
                 null,
                 false);
-
 
         final int day = this.getArguments().getInt(DAY_PARCEL);
 
@@ -117,7 +116,6 @@ public class DayFragment extends Fragment implements DayPresenterContract.View {
     }
 
     private AlertDialog buildDialog(final DialogCreateEventBinding dialogBinding, final int day) {
-
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(dialogBinding.getRoot())

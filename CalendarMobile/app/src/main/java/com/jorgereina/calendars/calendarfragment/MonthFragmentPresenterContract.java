@@ -30,6 +30,8 @@ public interface MonthFragmentPresenterContract {
         Event onGetEventData(int position);
 
         void onViewInitialized();
+
+        String convertTime(String time);
     }
 
 }
