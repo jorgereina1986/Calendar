@@ -51,5 +51,8 @@
     <string name="time_hint">Time</string>
     <string name="dialog_title">Create event</string>
     <string name="missing_field">Title and Time are required fields.</string>
+    
+    // Event Row layout
+    <string name="date">February %1$s</string>
 
 </resources>

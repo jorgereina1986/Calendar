@@ -1,7 +1,6 @@
 package com.jorgereina.calendars.calendarfragment;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import com.jorgereina.calendars.CalendarApi;
 import com.jorgereina.calendars.R;
@@ -10,7 +9,12 @@ import com.jorgereina.calendars.dayfragment.DayFragment;
 import com.jorgereina.calendars.MainActivity;
 import com.jorgereina.calendars.model.Event;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -42,6 +46,7 @@ public class MonthFragmentPresenter implements MonthFragmentPresenterContract.Pr
                 view.hideProgress();
                 events.clear();
                 events.addAll(response.body());
+                Collections.sort(events, new DayComparator());
                 view.loadEventData();
             }
 
@@ -70,5 +75,19 @@ public class MonthFragmentPresenter implements MonthFragmentPresenterContract.Pr
     @Override
     public void onViewInitialized() {
         getEventsRequest();
+    }
+
+    @Override
+    public String convertTime(String time) {
+        DateTimeFormatter inputFormatter = DateTimeFormat.forPattern("HHmm");
+        DateTimeFormatter outputFormatter = DateTimeFormat.forPattern("hh:mm a");
+        DateTime dateTime = inputFormatter.parseDateTime(time);
+        String formattedTimestamp = outputFormatter.print(dateTime.getMillis());
+        return formattedTimestamp;
+    }
+
+    @Override
+    public String formatDate(String date, String resId) {
+        return String.format(resId, date);
     }
 }

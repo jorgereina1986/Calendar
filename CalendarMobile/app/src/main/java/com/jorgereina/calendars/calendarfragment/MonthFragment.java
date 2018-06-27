@@ -19,6 +19,7 @@ import com.jorgereina.calendars.dayfragment.DayFragment;
 import com.jorgereina.calendars.model.Event;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**

@@ -32,5 +32,9 @@ public interface DayPresenterContract {
         int onGetDailyEventsCount();
 
         Event onGetEventData(int position);
+
+        String convertTime(String time);
+
+        String formatDate(String date, String resId);
     }
 }

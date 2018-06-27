@@ -11,6 +11,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.jorgereina.calendars.R;
@@ -60,11 +63,6 @@ public class DayFragment extends Fragment implements DayPresenterContract.View {
             @Override
             public void onClick(View view) {
                 showCreateEventDialog();
-//                presenter.onCreateEventSelected(
-//                        binding.titleEt.getText().toString(),
-//                        String.valueOf(day),
-//                        binding.descriptionEt.getText().toString(),
-//                        binding.timeEt.getText().toString());
             }
         });
     }
@@ -95,9 +93,6 @@ public class DayFragment extends Fragment implements DayPresenterContract.View {
 
     @Override
     public void eventCreatedSuccess() {
-//        binding.titleEt.setText("");
-//        binding.descriptionEt.setText("");
-//        binding.timeEt.setText("");
         makeToast(R.string.event_created);
     }
 
@@ -109,34 +104,38 @@ public class DayFragment extends Fragment implements DayPresenterContract.View {
     @Override
     public void showCreateEventDialog() {
 
-        final DialogCreateEventBinding dialogBinding = DataBindingUtil.inflate(LayoutInflater.from(
-                getActivity()),
+        final DialogCreateEventBinding dialogBinding = DataBindingUtil.inflate(
+                LayoutInflater.from(getActivity()),
                 R.layout.dialog_create_event,
                 null,
                 false);
 
-        final String title = dialogBinding.titleEt.getText().toString();
-        final String description = dialogBinding.descriptionEt.getText().toString();
-        final String time = dialogBinding.timeEt.getText().toString();
         final int day = this.getArguments().getInt(DAY_PARCEL);
-        
-        buildDialog(dialogBinding, title, description, time, day).show();
+
+        buildDialog(dialogBinding, day).show();
     }
 
-    private AlertDialog buildDialog(DialogCreateEventBinding dialogBinding, final String title, final String description, final String time, final int day) {
+    private AlertDialog buildDialog(final DialogCreateEventBinding dialogBinding, final int day) {
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(dialogBinding.getRoot())
                 .setTitle(R.string.dialog_title)
                 .setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        if (!title.isEmpty() && !time.isEmpty()) {
+
+                        String title = dialogBinding.titleEt.getText().toString();
+                        String description = dialogBinding.descriptionEt.getText().toString();
+                        String time = String.valueOf(dialogBinding.timePicker.getCurrentHour()) +
+                                String.valueOf(dialogBinding.timePicker.getCurrentMinute());
+
+                        if (!title.isEmpty() || !time.isEmpty()) {
                             presenter.onCreateEventSelected(
                                     title,
                                     String.valueOf(day),
                                     description,
                                     time);
-                        }else {
+                        } else {
                             makeToast(R.string.missing_field);
                         }
                     }
@@ -148,6 +147,4 @@ public class DayFragment extends Fragment implements DayPresenterContract.View {
     private void makeToast(int message) {
         Toast.makeText(getActivity(), getString(message), Toast.LENGTH_LONG).show();
     }
-
-
 }
