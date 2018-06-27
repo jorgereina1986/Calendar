@@ -11,6 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.jorgereina.calendars.R;
@@ -119,17 +121,44 @@ public class DayFragment extends Fragment implements DayPresenterContract.View {
         final String description = dialogBinding.descriptionEt.getText().toString();
         final String time = dialogBinding.timeEt.getText().toString();
         final int day = this.getArguments().getInt(DAY_PARCEL);
-        
+
         buildDialog(dialogBinding, title, description, time, day).show();
     }
 
-    private AlertDialog buildDialog(DialogCreateEventBinding dialogBinding, final String title, final String description, final String time, final int day) {
+    private AlertDialog buildDialog(final DialogCreateEventBinding dialogBinding,
+                                    final String title,
+                                    final String description,
+                                    final String time,
+                                    final int day) {
+
+        ArrayAdapter<CharSequence> hourAdapter = ArrayAdapter.createFromResource(
+                getActivity(),
+                R.array.hours_array,
+                android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> mintueAdapter = ArrayAdapter.createFromResource(
+                getActivity(),
+                R.array.minutes_array,
+                android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> amPmAdapter = ArrayAdapter.createFromResource(
+                getActivity(),
+                R.array.am_pm_array,
+                android.R.layout.simple_spinner_item);
+
+        hourAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mintueAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        amPmAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        dialogBinding.hourSpinner.setAdapter(hourAdapter);
+        dialogBinding.minuteSpinner.setAdapter(mintueAdapter);
+        dialogBinding.amPmSpinner.setAdapter(amPmAdapter);
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(dialogBinding.getRoot())
                 .setTitle(R.string.dialog_title)
                 .setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+
                         if (!title.isEmpty() && !time.isEmpty()) {
                             presenter.onCreateEventSelected(
                                     title,
