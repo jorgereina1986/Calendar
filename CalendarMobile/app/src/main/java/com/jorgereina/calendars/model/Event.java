@@ -9,7 +9,7 @@ import org.parceler.Parcel;
 @Parcel
 public class Event {
 
-    // non-private fields and empty constructor needed to for Parcel annotation to work
+    // non-private fields and empty constructor needed for Parcel annotation to work
     String id;
     String title;
     String date;
