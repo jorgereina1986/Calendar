@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import com.jorgereina.calendars.R;
 import com.jorgereina.calendars.databinding.EventItemBinding;
 import com.jorgereina.calendars.model.Event;
 
@@ -30,12 +31,11 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.DayViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull DayViewHolder holder, int position) {
-
         Event event = presenter.onGetEventData(position);
+        String resId = holder.binding.getRoot().getResources().getString(R.string.date);
         holder.binding.eventTitleTv.setText(event.getTitle());
-        holder.binding.dayTv.setText(event.getDate());
-        holder.binding.timeTv.setText(event.getTime());
-
+        holder.binding.dayTv.setText(presenter.formatDate(event.getDate(), resId));
+        holder.binding.timeTv.setText(presenter.convertTime(event.getTime()));
     }
 
     @Override

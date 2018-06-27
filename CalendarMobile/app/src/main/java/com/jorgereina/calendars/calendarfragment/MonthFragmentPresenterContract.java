@@ -32,6 +32,8 @@ public interface MonthFragmentPresenterContract {
         void onViewInitialized();
 
         String convertTime(String time);
+
+        String formatDate(String date, String resId);
     }
 
 }

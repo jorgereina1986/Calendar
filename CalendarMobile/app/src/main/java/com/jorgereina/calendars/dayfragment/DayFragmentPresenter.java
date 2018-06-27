@@ -4,6 +4,10 @@ import com.jorgereina.calendars.CalendarApi;
 import com.jorgereina.calendars.calendarfragment.RetrofitInstance;
 import com.jorgereina.calendars.model.Event;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,6 +75,20 @@ public class DayFragmentPresenter implements DayPresenterContract.Presenter {
     @Override
     public Event onGetEventData(int position) {
         return dailyEvents.get(position);
+    }
+
+    @Override
+    public String convertTime(String time) {
+        DateTimeFormatter inputFormatter = DateTimeFormat.forPattern("HHmm");
+        DateTimeFormatter outputFormatter = DateTimeFormat.forPattern("hh:mm a");
+        DateTime dateTime = inputFormatter.parseDateTime(time);
+        String formattedTimestamp = outputFormatter.print(dateTime.getMillis());
+        return formattedTimestamp;
+    }
+
+    @Override
+    public String formatDate(String date, String resId) {
+        return String.format(resId, date);
     }
 
 

@@ -85,4 +85,9 @@ public class MonthFragmentPresenter implements MonthFragmentPresenterContract.Pr
         String formattedTimestamp = outputFormatter.print(dateTime.getMillis());
         return formattedTimestamp;
     }
+
+    @Override
+    public String formatDate(String date, String resId) {
+        return String.format(resId, date);
+    }
 }
