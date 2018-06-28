@@ -35,7 +35,7 @@ public interface MonthFragmentPresenterContract {
 
         void onViewInitialized();
 
-        String convertTime(String time);
+        String convertTime(int hour, int minute);
 
         String formatDate(String date, String resId);
 

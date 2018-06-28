@@ -9,7 +9,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -36,6 +40,12 @@ public class MonthFragment extends Fragment implements MonthFragmentPresenterCon
     private List<Event> events = new ArrayList<>();
     private RecyclerView.LayoutManager layoutManager;
     private MonthAdapter adapter;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     @Nullable
     @Override
@@ -187,6 +197,23 @@ public class MonthFragment extends Fragment implements MonthFragmentPresenterCon
         }
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_favorite) {
+            presenter.onViewInitialized();
+            adapter.notifyDataSetChanged();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void setClickListenersToViews() {
         binding.day1.setOnClickListener(this);
         binding.day2.setOnClickListener(this);
@@ -228,9 +255,11 @@ public class MonthFragment extends Fragment implements MonthFragmentPresenterCon
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String title = dialogBinding.titleEt.getText().toString();
                         String description = dialogBinding.descriptionEt.getText().toString();
-                        String time = String.valueOf(dialogBinding.timePicker.getCurrentHour()) +
-                                String.valueOf(dialogBinding.timePicker.getCurrentMinute());
-
+                        Log.d("lagarto", "onClick: hour:  " + dialogBinding.timePicker.getCurrentHour());
+                        Log.d("lagarto", "onClick: minute: " + dialogBinding.timePicker.getCurrentMinute());
+                        String time = presenter.convertTime(
+                                dialogBinding.timePicker.getCurrentHour(),
+                                dialogBinding.timePicker.getCurrentMinute());
                         if (!title.isEmpty()) {
                             presenter.onEditEventSelected(event, title, description, time);
                         } else {
@@ -242,9 +271,7 @@ public class MonthFragment extends Fragment implements MonthFragmentPresenterCon
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         presenter.onDeleteEventSelected(event);
-
                     }
-
                 });
         return builder.create();
     }

@@ -33,7 +33,7 @@ public interface DayPresenterContract {
 
         Event onGetEventData(int position);
 
-        String convertTime(String time);
+        String convertTime(int hour, int minute);
 
         String formatDate(String date, String resId);
     }

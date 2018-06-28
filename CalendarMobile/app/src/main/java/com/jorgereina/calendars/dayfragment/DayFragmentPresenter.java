@@ -78,10 +78,26 @@ public class DayFragmentPresenter implements DayPresenterContract.Presenter {
     }
 
     @Override
-    public String convertTime(String time) {
+    public String convertTime(int hour, int minute) {
+
+        String h;
+        String m;
+
+        if (hour <= 9) {
+            h = "0" + hour;
+        } else {
+            h = hour + "";
+        }
+
+        if (minute <= 9) {
+            m = "0" + minute;
+        } else {
+            m = minute + "";
+        }
+
         DateTimeFormatter inputFormatter = DateTimeFormat.forPattern("HHmm");
         DateTimeFormatter outputFormatter = DateTimeFormat.forPattern("hh:mm a");
-        DateTime dateTime = inputFormatter.parseDateTime(time);
+        DateTime dateTime = inputFormatter.parseDateTime(h+m);
         String formattedTimestamp = outputFormatter.print(dateTime.getMillis());
         return formattedTimestamp;
     }

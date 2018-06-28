@@ -35,7 +35,7 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.DayViewHolder> {
         String resId = holder.binding.getRoot().getResources().getString(R.string.date);
         holder.binding.eventTitleTv.setText(event.getTitle());
         holder.binding.dayTv.setText(presenter.formatDate(event.getDate(), resId));
-        holder.binding.timeTv.setText(presenter.convertTime(event.getTime()));
+        holder.binding.timeTv.setText(event.getTime());
     }
 
     @Override

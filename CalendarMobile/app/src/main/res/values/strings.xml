@@ -61,4 +61,7 @@
     <string name="event_deleted">Event has been deleted</string>
     <string name="event_edited">Event has been edited.</string>
 
+    // Actionbar
+    <string name="action_refresh">Refresh</string>
+
 </resources>
