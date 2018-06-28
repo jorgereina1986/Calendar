@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -120,11 +121,14 @@ public class DayFragment extends Fragment implements DayPresenterContract.View {
                 .setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        Log.d("lagarto", "onClick: hour:  " + dialogBinding.timePicker.getCurrentHour());
+                        Log.d("lagarto", "onClick: minute: " + dialogBinding.timePicker.getCurrentMinute());
 
                         String title = dialogBinding.titleEt.getText().toString();
                         String description = dialogBinding.descriptionEt.getText().toString();
-                        String time = String.valueOf(dialogBinding.timePicker.getCurrentHour()) +
-                                String.valueOf(dialogBinding.timePicker.getCurrentMinute());
+                        String time = presenter.convertTime(
+                                dialogBinding.timePicker.getCurrentHour(),
+                                dialogBinding.timePicker.getCurrentMinute());
 
                         if (!title.isEmpty() || !time.isEmpty()) {
                             presenter.onCreateEventSelected(
