@@ -1,5 +1,6 @@
-# Spotify Calendar Backend Documentation
-
+# Calendar Backend Documentation
+## Endpoint
+```https://spotical.herokuapp.com/events```
 
 
 - [Events](#events)
@@ -42,16 +43,6 @@
 	GET /events
 
 
-### Parameters
-
-| Name    | Type      | Description                          |
-|---------|-----------|--------------------------------------|
-| q			| String			| **optional** <p>Query to search.</p>							|
-| page			| Number			| **optional** <p>Page number.</p>							|
-| limit			| Number			| **optional** <p>Amount of returned items.</p>							|
-| sort			| String[]			| **optional** <p>Order of returned items.</p>							|
-| fields			| String[]			| **optional** <p>Fields to be returned.</p>							|
-
 ## Update events
 
 
@@ -63,9 +54,9 @@
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| title			| 			|  <p>Events's title.</p>							|
-| date			| 			|  <p>Events's date.</p>							|
-| description			| 			|  <p>Events's description.</p>							|
-| time			| 			|  <p>Events's time.</p>							|
+| title			| String			|  <p>Events's title.</p>							|
+| date			| String			|  <p>Events's date.</p>							|
+| description			| String			|  <p>Events's description.</p>							|
+| time			| String			|  <p>Events's time.</p>							|
 
 
