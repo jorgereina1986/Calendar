@@ -53,7 +53,8 @@
     <string name="title_hint">Title</string>
     <string name="description_hint">Description(optional)</string>
     <string name="time_hint">Time</string>
-    <string name="dialog_title">Create event</string>
+    <string name="dialog_title_create_event">Create event</string>
+    <string name="dialog_title_edit_delete_event">Edit or Delete event</string>
     <string name="missing_field">Title and Time are required fields.</string>
     
     // Event Row layout

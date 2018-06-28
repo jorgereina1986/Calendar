@@ -117,7 +117,7 @@ public class DayFragment extends Fragment implements DayPresenterContract.View {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(dialogBinding.getRoot())
-                .setTitle(R.string.dialog_title)
+                .setTitle(R.string.dialog_title_create_event)
                 .setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -130,7 +130,7 @@ public class DayFragment extends Fragment implements DayPresenterContract.View {
                                 dialogBinding.timePicker.getCurrentHour(),
                                 dialogBinding.timePicker.getCurrentMinute());
 
-                        if (!title.isEmpty() || !time.isEmpty()) {
+                        if (!title.isEmpty()) {
                             presenter.onCreateEventSelected(
                                     title,
                                     String.valueOf(day),

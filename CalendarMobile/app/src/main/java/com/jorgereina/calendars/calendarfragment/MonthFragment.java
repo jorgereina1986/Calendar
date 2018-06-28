@@ -26,7 +26,6 @@ import com.jorgereina.calendars.dayfragment.DayFragment;
 import com.jorgereina.calendars.model.Event;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -249,7 +248,7 @@ public class MonthFragment extends Fragment implements MonthFragmentPresenterCon
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(dialogBinding.getRoot())
-                .setTitle(R.string.dialog_title)
+                .setTitle(R.string.dialog_title_edit_delete_event)
                 .setNegativeButton(R.string.dialog_edit_event, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -263,6 +262,7 @@ public class MonthFragment extends Fragment implements MonthFragmentPresenterCon
                         if (!title.isEmpty()) {
                             presenter.onEditEventSelected(event, title, description, time);
                         } else {
+
                             makeToast(R.string.missing_field);
                         }
                     }
