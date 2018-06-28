@@ -148,4 +148,6 @@ public class DayFragment extends Fragment implements DayPresenterContract.View {
     private void makeToast(int message) {
         Toast.makeText(getActivity(), getString(message), Toast.LENGTH_LONG).show();
     }
+
+
 }
