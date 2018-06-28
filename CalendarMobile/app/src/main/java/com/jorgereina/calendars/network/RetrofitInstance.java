@@ -1,8 +1,4 @@
-package com.jorgereina.calendars.calendarfragment;
-
-import android.support.annotation.NonNull;
-
-import com.jorgereina.calendars.CalendarApi;
+package com.jorgereina.calendars.network;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

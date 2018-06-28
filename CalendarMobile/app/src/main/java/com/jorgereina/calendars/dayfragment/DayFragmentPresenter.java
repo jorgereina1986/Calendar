@@ -1,7 +1,7 @@
 package com.jorgereina.calendars.dayfragment;
 
-import com.jorgereina.calendars.CalendarApi;
-import com.jorgereina.calendars.calendarfragment.RetrofitInstance;
+import com.jorgereina.calendars.network.CalendarApi;
+import com.jorgereina.calendars.network.RetrofitInstance;
 import com.jorgereina.calendars.model.Event;
 
 import org.joda.time.DateTime;

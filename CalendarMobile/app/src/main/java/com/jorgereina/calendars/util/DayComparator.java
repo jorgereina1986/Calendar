@@ -1,6 +1,4 @@
-package com.jorgereina.calendars.calendarfragment;
-
-import android.text.TextUtils;
+package com.jorgereina.calendars.util;
 
 import com.jorgereina.calendars.model.Event;
 

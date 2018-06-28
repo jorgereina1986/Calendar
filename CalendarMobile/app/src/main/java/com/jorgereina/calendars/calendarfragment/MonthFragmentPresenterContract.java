@@ -19,6 +19,10 @@ public interface MonthFragmentPresenterContract {
         void showDayDetails(int day);
 
         void fetchEventError(String message);
+
+        void showEditDeleteEventDialog(Event event);
+
+        void makeToast(int message);
     }
 
     interface Presenter {
@@ -34,6 +38,12 @@ public interface MonthFragmentPresenterContract {
         String convertTime(String time);
 
         String formatDate(String date, String resId);
+
+        void eventSelected(int position);
+
+        void onDeleteEventSelected(Event event);
+
+        void onEditEventSelected(Event event, String title, String description, String time);
     }
 
 }

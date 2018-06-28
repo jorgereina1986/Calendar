@@ -1,7 +1,9 @@
 package com.jorgereina.calendars.calendarfragment;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 
 import com.jorgereina.calendars.R;
 import com.jorgereina.calendars.calendarfragment.MonthFragmentPresenterContract.Presenter;
+import com.jorgereina.calendars.databinding.DialogCreateEventBinding;
 import com.jorgereina.calendars.databinding.FragmentMonthBinding;
 import com.jorgereina.calendars.dayfragment.DayFragment;
 import com.jorgereina.calendars.model.Event;
@@ -77,6 +80,21 @@ public class MonthFragment extends Fragment implements MonthFragmentPresenterCon
     @Override
     public void fetchEventError(String message) {
         Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showEditDeleteEventDialog(Event event) {
+        final DialogCreateEventBinding dialogBinding = DataBindingUtil.inflate(
+                LayoutInflater.from(getActivity()),
+                R.layout.dialog_create_event,
+                null,
+                false);
+        buildDialog(dialogBinding, event).show();
+    }
+
+    @Override
+    public void makeToast(int message) {
+        Toast.makeText(getActivity(), getString(message), Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -170,7 +188,6 @@ public class MonthFragment extends Fragment implements MonthFragmentPresenterCon
     }
 
     private void setClickListenersToViews() {
-
         binding.day1.setOnClickListener(this);
         binding.day2.setOnClickListener(this);
         binding.day3.setOnClickListener(this);
@@ -199,5 +216,56 @@ public class MonthFragment extends Fragment implements MonthFragmentPresenterCon
         binding.day26.setOnClickListener(this);
         binding.day27.setOnClickListener(this);
         binding.day28.setOnClickListener(this);
+    }
+
+    private AlertDialog buildDialog(final DialogCreateEventBinding dialogBinding, final Event event) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setView(dialogBinding.getRoot())
+                .setTitle(R.string.dialog_title)
+//                .setNeutralButton(R.string.dialog_edit_event, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//
+//                        String title = dialogBinding.titleEt.getText().toString();
+//                        String description = dialogBinding.descriptionEt.getText().toString();
+//                        String time = String.valueOf(dialogBinding.timePicker.getCurrentHour()) +
+//                                String.valueOf(dialogBinding.timePicker.getCurrentMinute());
+//
+//                        if (!title.isEmpty() || !time.isEmpty()) {
+//                            presenter.onCreateEventSelected(
+//                                    title,
+//                                    String.valueOf(day),
+//                                    description,
+//                                    time);
+//                        } else {
+//                            makeToast(R.string.missing_field);
+//                        }
+//                    }
+//                })
+                .setNegativeButton(R.string.dialog_edit_event, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String title = dialogBinding.titleEt.getText().toString();
+                        String description = dialogBinding.descriptionEt.getText().toString();
+                        String time = String.valueOf(dialogBinding.timePicker.getCurrentHour()) +
+                                String.valueOf(dialogBinding.timePicker.getCurrentMinute());
+
+                        if (!title.isEmpty()) {
+                            presenter.onEditEventSelected(event, title, description, time);
+                        } else {
+                            makeToast(R.string.missing_field);
+                        }
+                    }
+                })
+                .setNeutralButton(R.string.dialog_delete_event, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        presenter.onDeleteEventSelected(event);
+
+                    }
+
+                });
+        return builder.create();
     }
 }

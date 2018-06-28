@@ -40,6 +40,10 @@
     <string name="friday">Fri</string>
     <string name="saturday">Sat</string>
 
+    // Month Fragment
+    <string name="dialog_edit_event">Edit</string>
+    <string name="dialog_delete_event">Delete</string>
+
     // Day Fragment
     <string name="event_created">Event has been created</string>
     <string name="event_not_created">Something went wrong. Event was not created.</string>
@@ -54,5 +58,7 @@
     
     // Event Row layout
     <string name="date">February %1$s</string>
+    <string name="event_deleted">Event has been deleted</string>
+    <string name="event_edited">Event has been edited.</string>
 
 </resources>
