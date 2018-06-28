@@ -3,12 +3,14 @@ package com.jorgereina.calendars.dayfragment;
 import com.jorgereina.calendars.network.CalendarApi;
 import com.jorgereina.calendars.network.RetrofitInstance;
 import com.jorgereina.calendars.model.Event;
+import com.jorgereina.calendars.util.DayComparator;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -48,7 +50,7 @@ public class DayFragmentPresenter implements DayPresenterContract.Presenter {
     }
 
     @Override
-    public void onCreateEventSelected(String title, String date, String description, String time) {
+    public void onCreateEventSelected(final String title, final String date, final String description, final String time) {
 
         CalendarApi service = RetrofitInstance.getRetrofitInstance().create(CalendarApi.class);
         Call<Event> call = service.postEvent(title, date, description, time);
@@ -57,6 +59,9 @@ public class DayFragmentPresenter implements DayPresenterContract.Presenter {
             public void onResponse(Call<Event> call, Response<Event> response) {
                 view.eventCreatedSuccess();
                 view.hideProgress();
+                dailyEvents.add(new Event(title, date, description, time));
+                Collections.sort(dailyEvents, new DayComparator());
+                view.loadDailyEventsToRecyclerView();
             }
 
             @Override

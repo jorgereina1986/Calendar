@@ -13,10 +13,10 @@ public class DayComparator implements Comparator<Event> {
     @Override
     public int compare(Event e1, Event e2) {
 
-        final Integer date1 = getInt(e1.getDate());
-        final Integer date2 = getInt(e2.getDate());
-        Integer time1 = getInt(e1.getTime());
-        Integer time2 = getInt(e2.getTime());
+        final Integer date1 = getDay(e1.getDate());
+        final Integer date2 = getDay(e2.getDate());
+        Integer time1 = getTime(e1.getTime());
+        Integer time2 = getTime(e2.getTime());
 
         Integer dayComp = (date1 == null) ? (date2 == null) ? 0 : -1 : (date2 == null) ? 1 : date1.compareTo(date2);
 
@@ -31,7 +31,21 @@ public class DayComparator implements Comparator<Event> {
         }
     }
 
-    private Integer getInt(String number) {
+    private Integer getDay(String number) {
+        try {
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
+    private Integer getTime(String number) {
+
+        number = number.replace(":", "");
+        number = number.replace("AM", "");
+        number = number.replace("PM", "");
+        number = number.trim();
+
         try {
             return Integer.parseInt(number);
         } catch (NumberFormatException e) {
