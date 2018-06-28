@@ -10,7 +10,6 @@ import java.util.Comparator;
 
 public class DayComparator implements Comparator<Event> {
 
-
     @Override
     public int compare(Event e1, Event e2) {
 
@@ -32,7 +31,6 @@ public class DayComparator implements Comparator<Event> {
         }
     }
 
-
     private Integer getInt(String number) {
         try {
             return Integer.parseInt(number);
@@ -40,5 +38,4 @@ public class DayComparator implements Comparator<Event> {
             return null;
         }
     }
-
 }

@@ -33,14 +33,6 @@ public interface CalendarApi {
                           @Field("description") String description,
                           @Field("time") String time);
 
-//    @Multipart
-//    @PUT("events/{id}")
-//    Call<Event> editEvent(@Path("id") String id,
-//                                @Part("title") String title,
-//                                @Part("date") String date,
-//                                @Part("description") String description,
-//                                @Part("time") String time);
-
     @PUT("events/{id}")
     Call<Event> editEvent(@Path("id") String id, @Body Event event);
 

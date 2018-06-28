@@ -1,11 +1,8 @@
 package com.jorgereina.calendars.calendarfragment;
 
-import android.widget.Toast;
-
 import com.jorgereina.calendars.R;
 import com.jorgereina.calendars.network.CalendarApi;
 import com.jorgereina.calendars.calendarfragment.MonthFragmentPresenterContract.View;
-import com.jorgereina.calendars.MainActivity;
 import com.jorgereina.calendars.model.Event;
 import com.jorgereina.calendars.network.RetrofitInstance;
 import com.jorgereina.calendars.util.DayComparator;
@@ -27,8 +24,6 @@ import retrofit2.Response;
  */
 
 public class MonthFragmentPresenter implements MonthFragmentPresenterContract.Presenter {
-
-    private static final String TAG = MainActivity.class.getSimpleName() + "lagarto";
 
     private View view;
     private List<Event> events = new ArrayList<>();
@@ -63,8 +58,7 @@ public class MonthFragmentPresenter implements MonthFragmentPresenterContract.Pr
         DateTimeFormatter inputFormatter = DateTimeFormat.forPattern("HHmm");
         DateTimeFormatter outputFormatter = DateTimeFormat.forPattern("hh:mm a");
         DateTime dateTime = inputFormatter.parseDateTime(time);
-        String formattedTimestamp = outputFormatter.print(dateTime.getMillis());
-        return formattedTimestamp;
+        return outputFormatter.print(dateTime.getMillis());
     }
 
     @Override
@@ -127,7 +121,9 @@ public class MonthFragmentPresenter implements MonthFragmentPresenterContract.Pr
         CalendarApi service = RetrofitInstance.getRetrofitInstance().create(CalendarApi.class);
 
 
-        Call<Event> call = service.editEvent(event.getId(), new Event(event.getId(), title, event.getDate(), description, time));
+        Call<Event> call = service.editEvent(
+                event.getId(),
+                new Event(event.getId(), title, event.getDate(), description, time));
 
         call.enqueue(new Callback<Event>() {
             @Override
@@ -140,23 +136,5 @@ public class MonthFragmentPresenter implements MonthFragmentPresenterContract.Pr
                 view.fetchEventError(t.getMessage());
             }
         });
-
-
-//        call.enqueue(new Callback<List<Event>>() {
-//            @Override
-//            public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
-//
-//
-//                } else {
-//                    view.makeToast(R.string.missing_field);
-//                }
-//                view.makeToast(R.string.event_deleted);
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Event>> call, Throwable t) {
-//                view.fetchEventError(t.getMessage());
-//            }
-//        });
     }
 }

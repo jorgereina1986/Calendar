@@ -50,7 +50,7 @@ public class MonthAdapter extends RecyclerView.Adapter<MonthAdapter.MonthViewHol
 
         private EventItemBinding binding;
 
-        public MonthViewHolder(EventItemBinding binding) {
+        private MonthViewHolder(EventItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
             itemView.setOnClickListener(this);

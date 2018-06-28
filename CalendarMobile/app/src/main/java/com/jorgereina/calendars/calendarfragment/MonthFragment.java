@@ -223,26 +223,6 @@ public class MonthFragment extends Fragment implements MonthFragmentPresenterCon
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(dialogBinding.getRoot())
                 .setTitle(R.string.dialog_title)
-//                .setNeutralButton(R.string.dialog_edit_event, new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//
-//                        String title = dialogBinding.titleEt.getText().toString();
-//                        String description = dialogBinding.descriptionEt.getText().toString();
-//                        String time = String.valueOf(dialogBinding.timePicker.getCurrentHour()) +
-//                                String.valueOf(dialogBinding.timePicker.getCurrentMinute());
-//
-//                        if (!title.isEmpty() || !time.isEmpty()) {
-//                            presenter.onCreateEventSelected(
-//                                    title,
-//                                    String.valueOf(day),
-//                                    description,
-//                                    time);
-//                        } else {
-//                            makeToast(R.string.missing_field);
-//                        }
-//                    }
-//                })
                 .setNegativeButton(R.string.dialog_edit_event, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
